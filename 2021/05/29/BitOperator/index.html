@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Shuheng Mo">
+
+
+
+
+
+<title>Bit Operator | Mo&#39;s Personal Blog Site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Mo&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Mo&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Bit Operator</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Shuheng Mo</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 29, 2021&nbsp;&nbsp;18:10:57</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Technical/">Technical</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><strong>计算机中的位运算</strong></p>
+<ol>
+<li><strong>进制以及数字在计算机中的表示方式</strong></li>
+</ol>
+<p><strong>进制转换</strong></p>
+<p>十进制包括十个数码：0,1,2,3,4,5,6,7,8,9。</p>
+<p>计算机采用的进制是二进制。二进制包括两个数码：0,1。</p>
+<p>八进制和十六进制也是常见的进制。</p>
+<p>八进制包含八个数码：0,1,2,3,4,5,6,7。</p>
+<p>十六进制包含十六个数码，除了 0 到 9 以外，还有 A,B,C,D,E,F，分别对应十进制下的 10,11,12,13,14,15</p>
+<p>非十进制转十进制: 将非十进制数转成十进制数，只要将每个数位的加权和即可.</p>
+<p>十进制转非十进制: 分整数部分和小数部分来看待, 举例说明</p>
+<p>整数部分</p>
+<p><img src="C:\Users\asus\AppData\Roaming\Typora\typora-user-images\image-20210523171952545.png" alt="image-20210523171952545"></p>
+<p>非整数部分</p>
+<p><img src="C:\Users\asus\AppData\Roaming\Typora\typora-user-images\image-20210523172037831.png" alt="image-20210523172037831"></p>
+<p>50的二进制数是110010， 0.6875的二进制数是0.1011</p>
+<p>其他进制之间的转换可以简化为先转化为10进制数，而后转换为相应的进制。</p>
+<p><strong>计算机中的二进制</strong><br>计算机采用的是二进制，二进制包括两个数码：0,1。</p>
+<p>一位二进制数的可能取值有 2 个，k 位二进制数的可能取值就有 2^k个。</p>
+<p>在计算机中有多种数据类型，表示整数的数据类型就有好几种，1,2,4,8字节数，其中1字节数对应8位二进制数，取值范围为0到127（若该数据为负则取值范围为-128到-1, 无符号时为0 到 255）,其他字节数以此类推。</p>
+<p>对于计算机中的整数，二进制的最高位用于表示该整数的正负， 通常0为正整数，1表示负整数。</p>
+<p><strong>原码、补码和反码</strong><br><strong>机器数和真值</strong><br>以 8 位二进制数为例。十进制数 +10 转换成二进制数是 00001010，十进制数 −10 转换成二进制数是 10001010。这里的 二进制数就是机器数。</p>
+<p>因为机器数的最高位是符号位，所以机器数的形式值不一定等于真正数值. 为了加以区分，将机器数的真正数值称为机器数的真值。</p>
+<p>例如，00000010 的真值是 2，10000010 的真值是 −2。</p>
+<p><strong>原码</strong><br>原码是机器数的符号位加上机器数的真值的绝对值，最高位是符号位，其余位表示数值。</p>
+<p>8 位二进制数的原码表示的最大值是 01111111，即十进制的127，最小值是 11111111，即十进制的 −127，因此 8 位二进制数的原码表示的取值范围是 -127到 +127。</p>
+<p>原码是人脑最容易理解和计算的表示方式。</p>
+<p><strong>反码</strong></p>
+<p>其实就是源码取反。举例说明：</p>
+<p>以 8 位二进制数10 , -10为例:</p>
+<p>+10 的原码是 00001010，反码是 00001010；非负数不变</p>
+<p>-10的原码是 10001010，反码是 11110101。负数除了最高位之后的都取反</p>
+<p><strong>补码</strong></p>
+<p>基于反码获得。举例说明：</p>
+<p>以 8 位二进制数10 , -10为例:</p>
+<p>+10 的原码是 00001010，补码是 00001010；非负数不变</p>
+<p>-10的反码是 11110101 (245)，补码是 11110110 (246)。负数是在反码的基础上+1得到的</p>
+<p><strong>由于补码解决了原马和反码之中存在的多种会导致计算错误的问题 (以数字+0和-0的为例)，因此计算机采用补码进行运算。</strong></p>
+<p><strong>位运算</strong></p>
+<p>位运算共有 6种，分别是：<strong>与、或、异或、取反、左移和右移</strong>，其中左移和右移统称移位运算，移位运算又分为算术移位和逻辑移位。上述位运算中，只有<strong>取反是一元运算</strong>，其余的都是二元运算。位运算只针对二进制表示，操作也是在二进制数上操作。</p>
+<p>与运算的符号是 &amp;，运算规则是：对于每个二进制位，当两个数对应的位都为 1 时，结果才为 1，否则结果为 0。</p>
+<p>或运算的符号是 |，运算规则是：对于每个二进制位，当两个数对应的位都为 0 时，结果才为 0，否则结果为 1。</p>
+<p>异或运算的符号是 ⊕（在代码中用 ∧ 表示异或），运算规则是：对于每个二进制位，当两个数对应的位相同时，结果为 0，否则结果为 1。</p>
+<p>取反运算的符号是 ∼，运算规则是：对一个数的每个二进制位进行取反操作，0 变成 1，1 变成 0。</p>
+<p>**移位运算 **按照移位方向分类可以分成左移和右移，按照是否带符号分类可以分成算术移位和逻辑移位。</p>
+<p>左移运算的符号是 &lt;&lt;。左移运算时，将全部二进制位向左移动若干位，高位丢弃，低位补 0。对于左移运算，算术移位和逻辑移位是相同的。</p>
+<p>右移运算的符号是 &gt;&gt;。右移运算时，将全部二进制位向右移动若干位，低位丢弃，高位的补位由算术移位或逻辑移位决定 （对于非负数算术移位和逻辑移位是一样的）：算术右移时，高位补最高位；逻辑右移时，高位补 0。</p>
+<p>例如：</p>
+<p>−50 的二进制表示是 11001110。-50 算术右移 2 位的结果是 -13，对应的二进制表示是 11110011；-50 逻辑右移 2 位的结果是 51，对应的二进制表示是 00110011。</p>
+<p>右移运算中的算术移位和逻辑移位是不同的，<strong>计算机内部的右移运算采取的是哪一种呢</strong>？</p>
+<p>对于 C/C++ 而言，数据类型包含有符号类型和无符号类型，其中有符号类型使用关键字signed 声明，无符号类型使用关键字 unsigned 声明，两个关键字都不使用时，默认是有符号类型。对于有符号类型，右移运算为算术右移；对于无符号类型，右移运算为逻辑右移。</p>
+<p>对于 Java 而言，不存在无符号类型，所有的表示整数的类型都是有符号类型，因此需要区分算术右移和逻辑右移。在Java 中，算术右移的符号是 &gt;&gt;，逻辑右移的符号是 &gt;&gt;&gt;。</p>
+<p>左移运算对应乘法运算。将一个数左移 k 位，等价于将这个数乘以 2^k. 算术右移运算对应除法运算。将一个数右移 k 位，相当于将这个数除以 2^k （向下取整）。注意算数右移k位在数字为负的时候有精度差， 例如 (−50)&gt;&gt;2 = -13.</p>
+<p><strong>位运算的其他性质</strong></p>
+<p><img src="C:\Users\asus\AppData\Roaming\Typora\typora-user-images\image-20210523181709337.png" alt="image-20210523181709337"></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Shuheng Mo</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2021/05/29/BitOperator/">http://example.com/2021/05/29/BitOperator/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Manners maketh man.</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Data-Structure-Algorithms/"># Data Structure & Algorithms</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/05/28/My%20First%20Blog/">My First Blog</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Shuheng Mo | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
