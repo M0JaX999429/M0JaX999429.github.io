@@ -12,7 +12,7 @@
 
 
 
-<title>My First Blog | Mo&#39;s Personal Blog Site</title>
+<title>Common Computational Geometry algorithms &amp; their application | Mo&#39;s Personal Blog Site</title>
 
 
 
@@ -107,11 +107,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">My First Blog</h1>
+            <h1 class="post-title">Common Computational Geometry algorithms &amp; their application</h1>
             
                 <div class="post-meta">
                     
@@ -120,14 +182,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">May 28, 2021&nbsp;&nbsp;23:32:20</a>
+                        Date: <a href="#">June 10, 2021&nbsp;&nbsp;18:42:41</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/Normal/">Normal</a>
+                                <a href="/categories/Technical/">Technical</a>
                             
                         </span>
                     
@@ -136,21 +198,7 @@
         </header>
 
         <div class="post-content">
-            <p>Hi there, my name is Shuheng Mo and this is my personal technology blog site. Welcome to be here my friends! Here are my interested topics:</p>
-<ol>
-<li><p>Data Structure &amp; Algorithms</p>
-</li>
-<li><p>Computational Geometry</p>
-</li>
-<li><p>Data Analysis</p>
-</li>
-<li><p>Artificial Intelligence &amp; Deep Learning</p>
-</li>
-</ol>
-<p>Furthermore, I coding with Java, Python, C/C++, Go and have experiences in Linux server and GUI applications (on Windows &amp; Android). Please feel free to interact with me and share your wonderful idea!</p>
-<p>e-mail: <a href="mailto:&#115;&#104;&#117;&#x68;&#101;&#110;&#x67;&#x5f;&#x6d;&#111;&#x5f;&#109;&#x61;&#105;&#x6c;&#x40;&#x31;&#x36;&#51;&#x2e;&#x63;&#x6f;&#109;">&#115;&#104;&#117;&#x68;&#101;&#110;&#x67;&#x5f;&#x6d;&#111;&#x5f;&#109;&#x61;&#105;&#x6c;&#x40;&#x31;&#x36;&#51;&#x2e;&#x63;&#x6f;&#109;</a></p>
-<p>Github: <a target="_blank" rel="noopener" href="https://github.com/M0JaX999429/">https://github.com/M0JaX999429/</a></p>
-
+            <h1 id="常见的计算几何算法以及它们的应用场景"><a href="#常见的计算几何算法以及它们的应用场景" class="headerlink" title="常见的计算几何算法以及它们的应用场景"></a><strong>常见的计算几何算法以及它们的应用场景</strong></h1>
         </div>
 
         
@@ -183,7 +231,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/Notice/"># Notice</a>
+                        <a href="/tags/Computational-Geometry/"># Computational Geometry</a>
                     
                         
                 </span>
@@ -196,8 +244,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/05/29/BitOperator/">Bit Operator</a>
             
+            <a class="next" rel="next" href="/2021/06/10/DP-G-DD/">Dynamic Programming, Greedy Method & Divide-and-Conquer</a>
             
         </section>
 
