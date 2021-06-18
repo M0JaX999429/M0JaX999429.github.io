@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Shuheng Mo">
+
+
+
+
+
+<title>SSH and remotely connect to server (minimal) | Mo&#39;s Personal Blog Site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Mo&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Mo&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">SSH and remotely connect to server (minimal)</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Shuheng Mo</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 19, 2021&nbsp;&nbsp;3:09:02</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Technical/">Technical</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="SSH-and-remotely-connect-to-server-minimal"><a href="#SSH-and-remotely-connect-to-server-minimal" class="headerlink" title="SSH and remotely connect to server (minimal)"></a>SSH and remotely connect to server (minimal)</h1><h1 id="Install-CentOS-server"><a href="#Install-CentOS-server" class="headerlink" title="Install CentOS server"></a>Install CentOS server</h1><p>Download the minimal mirror CentOS-7-x86_64-Minimal-2009.iso from <a href="%22https://www.centos.org/download/%22">CentOS Official SIte</a>. </p>
+<h1 id="Basic-configuration"><a href="#Basic-configuration" class="headerlink" title="Basic configuration"></a>Basic configuration</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br><span class="line">ip addr</span><br><span class="line"></span><br><span class="line"><span class="comment"># The system configuration file</span></span><br><span class="line">cat /etc/sysconfig/network-scripts/ifcfg-ens33 [Your network name varies]</span><br></pre></td></tr></table></figure>
+<p>Solution to VMware bridge connection: <a href="%22https://www.cnblogs.com/jasmine-jobs/p/5928218.html%22">Solution</a></p>
+<p>e.g. IP address for CentOS server virtual machine on my PC: 192.168.0.120</p>
+<h1 id="Network-protocols"><a href="#Network-protocols" class="headerlink" title="Network protocols"></a>Network protocols</h1><p>HTTPS, TLS, SSL, SSH, FTP, TELNET (this protocol is prohibited because of security reason),<br>There are too many protocols in Computer Networks, do some further reading by yourself.</p>
+<p>SSH  (Secure SHell)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh</span><br></pre></td></tr></table></figure>
+
+<h1 id="Encryption-amp-Decryption-SSH"><a href="#Encryption-amp-Decryption-SSH" class="headerlink" title="Encryption &amp; Decryption / SSH"></a>Encryption &amp; Decryption / SSH</h1><h2 id="Symmetric-key-Encryption"><a href="#Symmetric-key-Encryption" class="headerlink" title="Symmetric-key Encryption"></a>Symmetric-key Encryption</h2><p>Encrypt plaintext using only one key.</p>
+<p>message(m) –&gt; Encrypt(superKey) –&gt;E(m)</p>
+<p>E(m) –&gt; Decrypt(superKey) –&gt; message(m)</p>
+<p>Hacker can access the key when client connect to server first.</p>
+<h2 id="Asymmetric-Key-Encryption"><a href="#Asymmetric-Key-Encryption" class="headerlink" title="Asymmetric-Key Encryption"></a>Asymmetric-Key Encryption</h2><p>Similar to Symmetric one, but with two key: public key and private key.</p>
+<p>public to encrypt and private one for decrypt.</p>
+<p><strong>e.g. RSA algorithm</strong></p>
+<p>SSH combine both encryption methods: client and server transmute the asy-encryption’s key, then use the sy-encryption way to communicate. (do some research on this yourself)</p>
+<h2 id="Make-your-server-or-client-‘SSH-enabled’"><a href="#Make-your-server-or-client-‘SSH-enabled’" class="headerlink" title="Make your server (or client) ‘SSH-enabled’"></a>Make your server (or client) ‘SSH-enabled’</h2><p>First step: install <a href="%22www.openssh.com%22">OpenSSH</a><br>openssh-clients for clients and openssh-server for servers. (This requires client-server model)</p>
+<p>Second step: what you are going to do on your machine is:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start sshd</span><br><span class="line"><span class="comment"># another option is : sudo systemctl enable sshd</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#other useful command</span></span><br><span class="line"><span class="comment">#sudo systemctl stop sshd</span></span><br><span class="line"><span class="comment">#sudo systemctl restart sshd</span></span><br><span class="line"><span class="comment">#sudo systemctl status sshd</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#sudo systemctl list-unit-files =&gt;used to see what tools that installed are activated</span></span><br></pre></td></tr></table></figure>
+
+<p>Common SSH tools on Windows: Putty, XShell, SecureCRT, <em><strong>MobaXterm</strong></em> | on Linux: just install openssh-clients | no need for macOS</p>
+<p>SSH to the server (on Linux Client)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh roo@192.168.0.120 </span><br><span class="line"><span class="comment"># ssh [user_name]@[server]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-SSH-using-‘config’-file-on-Linux-server"><a href="#Configure-SSH-using-‘config’-file-on-Linux-server" class="headerlink" title="Configure SSH using ‘config’ file (on Linux server)"></a>Configure SSH using ‘config’ file (on Linux server)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># for client, common args in file: Host, HostName, Port, User</span></span><br><span class="line">/etc/ssh/ssh_config</span><br><span class="line"><span class="comment"># for server, common args in file: Port, PermitRootLogin, PasswordAuthentication, PubkeyAuthentication, PermitEmptyPasswords</span></span><br><span class="line">/etc/ssh/sshd_config</span><br><span class="line"></span><br><span class="line"><span class="comment"># The global config file above do changes to all user, be careful</span></span><br><span class="line"></span><br><span class="line">PermitRootLogin no</span><br><span class="line"><span class="comment"># for current user (you, you can be client/server )</span></span><br><span class="line">~/ .ssh/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># if no such folder, run: ssh localhost, if no config file on client,run:</span></span><br><span class="line">[mo@mos-computer .ssh]$ touch config</span><br><span class="line">[mo@mos-computer .ssh]$ chmod 600 config</span><br><span class="line">[mo@mos-computer .ssh]$ nano config</span><br><span class="line">[mo@mos-computer .ssh]$ cat config </span><br><span class="line">Host Mo</span><br><span class="line">	HostName 192.168.0.120</span><br><span class="line">	Port 22</span><br><span class="line">	User root</span><br><span class="line">[mo@mos-computer .ssh]$ ssh Mo</span><br><span class="line">root@192.168.0.120<span class="string">&#x27;s password: </span></span><br><span class="line"><span class="string">Last login: Mon Mar  8 00:50:12 2021 from localhost</span></span><br><span class="line"><span class="string">[root@localhost ~]# </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># after modificatte the config file, it is more convenient to log in</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># man sshd_config/ man ssh_config to see more details</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Activate config changes immediately: systemctl restart sshd </span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="SSH-log-in-without-password-pubKey-log-in"><a href="#SSH-log-in-without-password-pubKey-log-in" class="headerlink" title="SSH log in without password (pubKey log in)"></a>SSH log in without password (pubKey log in)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">[mo@mos-computer ~]$ ssh-keygen</span><br><span class="line"><span class="comment"># you can use -t to specify key algorithm type</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/home/mo/.ssh/id_rsa): </span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /home/mo/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /home/mo/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:CL4VZcWLLahJK3bHxnTPmMcmu9oebOAD8Sq4pn4NPaA mo@mos-computer</span><br><span class="line">The key<span class="string">&#x27;s randomart image is:</span></span><br><span class="line"><span class="string">+---[RSA 2048]----+</span></span><br><span class="line"><span class="string">|        oo.      |</span></span><br><span class="line"><span class="string">|       o  .      |</span></span><br><span class="line"><span class="string">|    o .. o .     |</span></span><br><span class="line"><span class="string">|   o.+oo+ o      |</span></span><br><span class="line"><span class="string">|  ..=B=.SB       |</span></span><br><span class="line"><span class="string">| Eo.=O=o+ *      |</span></span><br><span class="line"><span class="string">|...o=o+ +=       |</span></span><br><span class="line"><span class="string">| o o . +..       |</span></span><br><span class="line"><span class="string">|*..   .o+.       |</span></span><br><span class="line"><span class="string">+----[SHA256]-----+</span></span><br><span class="line"><span class="string">[mo@mos-computer ~]$ cd .ssh</span></span><br><span class="line"><span class="string">[mo@mos-computer .ssh]$ ls</span></span><br><span class="line"><span class="string">config  id_rsa  id_rsa.pub  known_hosts</span></span><br><span class="line"><span class="string">[mo@mos-computer .ssh]$ cat id_rsa</span></span><br><span class="line"><span class="string">-----BEGIN RSA PRIVATE KEY-----</span></span><br><span class="line"><span class="string">MIIEpAIBAAKCAQEA6sB0mGq1VsP5bqvd4QLNrzwW56MhfKXTOCugr9YCkAVEIMCU</span></span><br><span class="line"><span class="string">KmM0EFcyBq1wCH94UE6EvnuyTBSwYl6JoJrPb40cFRSYjSVHkk+luX/iWtVZiqHZ</span></span><br><span class="line"><span class="string">sqTxE+W/fIPtq7Q2BwG+gY/I/zPymwDrP0dGI/JF9yl4MwCk+b/CUi8ssj1OjPR1</span></span><br><span class="line"><span class="string">eylxgn1Frb/1qjucW/QEShI6m+7kRUtGQJNwPOGKDIoAsdPFF4TLeeRjb3ji6iLR</span></span><br><span class="line"><span class="string">OjLLCgjfwPv4O8j+z4uyXkUloQAXsL/sCE6N03vuqu/KZ9hzEJAxMPPr3miFqhvP</span></span><br><span class="line"><span class="string">hDIUN2MQVvSxiweTP/suEAwMJY8FcBIiibtNnwIDAQABAoIBAEM3OetOWn/ueyQa</span></span><br><span class="line"><span class="string">J9y+ncA4F2LZzcPQA0uJCmhugatVJq2uFn6Qix7GqLdKv9JfFUcBRHb6GhI4tkxk</span></span><br><span class="line"><span class="string">P0nyKcUKBWlvzUJU00psbcpQeLKDdjEAqMHDApgs54gyikHoxrN452BXmDiiWivR</span></span><br><span class="line"><span class="string">tooW0VmHjEr538XSwGoWYwB/K3AZGzo1/xgV/xhDnNbbjnJWTBFsTX3qyAfNhigB</span></span><br><span class="line"><span class="string">JEA2q8GD3N1kxUG2HfatxkFBYyB3FtYTccSPCjkOif+acvQeoqhkVFGgOYZaj6YL</span></span><br><span class="line"><span class="string">BM2X6qvF1bSxLNYZB4UKmdXZiGyznrfDnv6STUcyqe+yjzla0iyuQ2AUOUx550qs</span></span><br><span class="line"><span class="string">wJxXuvECgYEA/9Y+jbvJaMRveibg2nSsjjERoE4rx06Mjgmp59tZ1YNVuzFNM2iR</span></span><br><span class="line"><span class="string">UP05/e63JxQgYmh0VIVr05cSOOGGIklr6HuffU1d31S7RrOJx7J+LmZ7C7nQMlA0</span></span><br><span class="line"><span class="string">sdbxccL/LI/JpcOvXmWAMgDNjONEt7lDqnJAZ86PbR2C/WrH0C3EJqcCgYEA6ubF</span></span><br><span class="line"><span class="string">Ds3/omS2s04dF+HFQ8k6ElFFTo4mmOVu+FvhiwGVU0QnFoMZLQ5G3HRUncCHUZML</span></span><br><span class="line"><span class="string">aGR+g8KR+9KB7dAua2bN0OBwKRvgw0isGK0dmVCX0dc7UmqyUQPlBYSja8x1Kfyg</span></span><br><span class="line"><span class="string">+2yTTKUBrrGFkAmI7Q2f7OZt2t8Ff/F7HeOieEkCgYBtma76sTQ7ucu4HOe/LrSt</span></span><br><span class="line"><span class="string">xb+zWUnP/IqiXul29rWpjrYvl5NnLqjydUley+GS0EB/aBhODUqAPvwDejoofiPI</span></span><br><span class="line"><span class="string">WQ2edIJ+pqIES+3+qyz7W9Pi1hunMk0g0uBkyBDhWkgcx5RdcEZXJZjpfoN14dxn</span></span><br><span class="line"><span class="string">LMMCta8kI7x2LESlnrWliQKBgQCglAsH2Ni1KcYfgvmudr9EXI4fMYGAdvp5sPYQ</span></span><br><span class="line"><span class="string">P7dKMFXlKwTRheMzArx8PeYORSv8HtpAjdpStjLXhAsgCB2DfC6caKEj6RPYS5ih</span></span><br><span class="line"><span class="string">8c33Hbn7T/gUmi215kSsZgTVT1qUzkc6OPnk/jPNOTvFwE7jRloaN1fHtIfs86Yn</span></span><br><span class="line"><span class="string">Q5KwSQKBgQDvInpamHWJaQCI43g0jaQwnzRP7CcBQz/gppLktLnAjzo1io70HsKN</span></span><br><span class="line"><span class="string">joMVaBUz8rO+bwS/fXbS7QQ7vN3otLxzAv0Fb8eHCC30E4W4mGLMehzAd/QVB6O+</span></span><br><span class="line"><span class="string">LK8Vv9f8Z74RGj7jhuoBfvmS/N36B4ZvqqD8gqmD96QsmA19Pa0Izg==</span></span><br><span class="line"><span class="string">-----END RSA PRIVATE KEY-----</span></span><br><span class="line"><span class="string">[mo@mos-computer .ssh]$ cat id_rsa.pub</span></span><br><span class="line"><span class="string">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqwHSYarVWw/luq93hAs2vPBbnoyF8pdM4K6Cv1gKQBUQgwJQqYzQQVzIGrXAIf3hQToS+e7JMFLBiXomgms9vjRwVFJiNJUeST6W5f+Ja1VmKodmypPET5b98g+2rtDYHAb6Bj8j/M/KbAOs/R0Yj8kX3KXgzAKT5v8JSLyyyPU6M9HV7KXGCfUWtv/WqO5xb9ARKEjqb7uRFS0ZAk3A84YoMigCx08UXhMt55GNveOLqItE6MssKCN/A+/g7yP7Pi7JeRSWhABewv+wITo3Te+6q78pn2HMQkDEw8+veaIWqG8+EMhQ3YxBW9LGLB5M/+y4QDAwljwVwEiKJu02f mo@mos-computer</span></span><br><span class="line"><span class="string">[mo@mos-computer .ssh]$ ssh-copy-id root@192.168.0.120</span></span><br><span class="line"><span class="string">/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed</span></span><br><span class="line"><span class="string">/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys</span></span><br><span class="line"><span class="string">root@192.168.0.120&#x27;</span>s password: </span><br><span class="line"></span><br><span class="line">Number of key(s) added: 1</span><br><span class="line"></span><br><span class="line">Now try logging into the machine, with:   <span class="string">&quot;ssh &#x27;root@192.168.0.120&#x27;&quot;</span></span><br><span class="line">and check to make sure that only the key(s) you wanted were added.</span><br><span class="line"></span><br><span class="line"><span class="comment"># if addr of key is not in default location, use -i to specify,read the manual</span></span><br><span class="line"></span><br><span class="line">[mo@mos-computer .ssh]$ ssh Mo</span><br><span class="line">Last login: Mon Mar  8 00:55:14 2021 from 192.168.0.106</span><br><span class="line">[root@localhost ~]<span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Above process generated a public key (using RSA) and copy this key from client to server&#x27;s ~/.ssh/authorized_keys folder and thus completed the log in without needing root user&#x27;s password.</span></span><br></pre></td></tr></table></figure>
+
+<p>However if you want to return to log in mode, here is the option:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ssh -o PreferredAuthentications=password -o PubKeyAuthentication=no [user_name]@[host]</span><br><span class="line"></span><br><span class="line">[mo@mos-computer .ssh]$ ssh -o PreferredAuthentications=password -o PubKeyAuthentication=no root@192.168.0.120</span><br><span class="line">root@192.168.0.120<span class="string">&#x27;s password: </span></span><br><span class="line"><span class="string">Last login: Mon Mar  8 01:06:37 2021 from 192.168.0.106</span></span><br><span class="line"><span class="string">[root@localhost ~]# exit</span></span><br><span class="line"><span class="string">logout</span></span><br><span class="line"><span class="string">Connection to 192.168.0.120 closed.</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Shuheng Mo</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Manners maketh man.</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/06/19/TextEdit_VersionControl_Note/">Text Editors skills & Version Control</a>
+            
+            
+            <a class="next" rel="next" href="/2021/06/19/Shell_Scripts_Note/">Shell Scripts & Linux Programming</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Shuheng Mo | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

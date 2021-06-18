@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Shuheng Mo">
+
+
+
+
+
+<title>Text Editors skills &amp; Version Control | Mo&#39;s Personal Blog Site</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Mo&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Mo&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Text Editors skills &amp; Version Control</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Shuheng Mo</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 19, 2021&nbsp;&nbsp;3:09:03</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Technical/">Technical</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Text-Editors-skills-amp-Version-Control"><a href="#Text-Editors-skills-amp-Version-Control" class="headerlink" title="Text Editors skills &amp; Version Control"></a>Text Editors skills &amp; Version Control</h1><h1 id="Vim-you-can-use-a-gnome-version-gVim-too-amp-Emacs"><a href="#Vim-you-can-use-a-gnome-version-gVim-too-amp-Emacs" class="headerlink" title="Vim (you can use a gnome version gVim too) &amp; Emacs"></a>Vim (you can use a gnome version gVim too) &amp; Emacs</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">[mo@mos-computer ~]$ sudo yum install vim</span><br><span class="line">[mo@mos-computer ~]$ sudo yum install emacs</span><br><span class="line"><span class="comment"># Vim tutorial</span></span><br><span class="line">[mo@mos-computer ~]$ vimtutor</span><br><span class="line"></span><br><span class="line"><span class="comment"># Vim modes: Interactive, Insert (enter: i, a ,o ignore case; s-delete current word and enter insert mode S-delete current line and enter insert mode; exit: esc), Command Line (&#x27;:&#x27; to enter), Visual mode (v-char visual mode; V-lines&#x27; visual mode, Ctrl + v is module visual mode)</span></span><br><span class="line"></span><br><span class="line">content <span class="keyword">in</span> myFile (learn some useful commands):</span><br><span class="line">[mo@mos-computer ~]$ cat myFile</span><br><span class="line">[mo@mos-computer ~]$ cat myFile</span><br><span class="line">Hello Linuxers !</span><br><span class="line"></span><br><span class="line">I just write some lines here <span class="keyword">in</span> the Vim <span class="keyword">for</span> filling the screen.</span><br><span class="line">You might feel easier to write things when switched to Insert mode <span class="keyword">in</span> Vim.</span><br><span class="line">:p</span><br><span class="line"></span><br><span class="line">You can move cursor here by: h &lt;-, j up, k down, l -&gt;.</span><br><span class="line"></span><br><span class="line">to the head of the line: 0 ; to the end of the line: $; move word by word: w.</span><br><span class="line"></span><br><span class="line">save file :w [file_name] ; add <span class="string">&#x27;!&#x27;</span> to force these <span class="built_in">command</span> to execute.</span><br><span class="line">[mo@mos-computer ~]$ vim myFile</span><br><span class="line">[mo@mos-computer ~]$ cat myFile</span><br><span class="line">Hello Linuxers !</span><br><span class="line"></span><br><span class="line">I just write some lines here <span class="keyword">in</span> the Vim <span class="keyword">for</span> filling the screen.</span><br><span class="line">You might feel easier to write things when switched to Insert mode <span class="keyword">in</span> Vim.</span><br><span class="line">:p</span><br><span class="line"></span><br><span class="line">You can move cursor here by: h &lt;-, j up, k down, l -&gt;.</span><br><span class="line"></span><br><span class="line">to the head of the line: 0 ; to the end of the line: $; move word by word: w.</span><br><span class="line"></span><br><span class="line">save file :w [file_name] ; add <span class="string">&#x27;!&#x27;</span> to force these <span class="built_in">command</span> to execute.</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;: x&#x27;</span> has the same effect as </span><br><span class="line">[mo@mos-computer ~]$ vim myFile</span><br><span class="line">[mo@mos-computer ~]$ vim myFile</span><br><span class="line"></span><br><span class="line">[No write since last change]</span><br><span class="line">compression    htop-2.2.0.tar.gz  newly_created_file  rarlinux-x64-5.7.0.tar.gz</span><br><span class="line">Desktop        Music		  node		      redirect</span><br><span class="line">Documents      myFile		  nohup.out	      repeat.txt</span><br><span class="line">Downloads      myFIle		  number.txt	      results.txt</span><br><span class="line">errors.log     name_sorted.txt	  output_find	      Templates</span><br><span class="line">file-copy.txt  name.txt		  Pictures	      <span class="built_in">test</span></span><br><span class="line">grep_log       newfile		  Public	      unique.txt</span><br><span class="line">htop-2.2.0     new_folder	  rar		      Videos</span><br><span class="line"></span><br><span class="line">Press ENTER or <span class="built_in">type</span> <span class="built_in">command</span> to <span class="built_in">continue</span></span><br><span class="line">[mo@mos-computer ~]$ cat myFile </span><br><span class="line">Hello Linuxers !</span><br><span class="line"></span><br><span class="line">I just write some lines here <span class="keyword">in</span> the Vim <span class="keyword">for</span> filling the screen.</span><br><span class="line">You might feel easier to write things when switched to Insert mode <span class="keyword">in</span> Vim.</span><br><span class="line">:p</span><br><span class="line"></span><br><span class="line">You can move cursor here by: h &lt;-, j up, k down, l -&gt;.</span><br><span class="line"></span><br><span class="line">to the head of the line: 0 ; to the end of the line: $; move word by word: w.</span><br><span class="line"></span><br><span class="line">save file :w [file_name] ; add <span class="string">&#x27;!&#x27;</span> to force these <span class="built_in">command</span> to execute.</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;: x&#x27;</span> has the same effect as;</span><br><span class="line"></span><br><span class="line">========================================================================</span><br><span class="line">Advanced <span class="built_in">command</span></span><br><span class="line"></span><br><span class="line">1. <span class="keyword">in</span> Interactive mode, enter [word_num] x to delete designated number of words after the cursor.</span><br><span class="line"></span><br><span class="line">2. enter d to delete line or words. [line_num] dd to delete current line. [word_num]dw to delete current word. (d0 --&gt;delete to head,d$ --&gt; delete to tail)</span><br><span class="line"></span><br><span class="line">3. enter y to copy. yy copy line to storage. yw copy a word. (y0 and y$ also works)</span><br><span class="line"></span><br><span class="line">4. enter [paste_num] p to paste (after cursor).</span><br><span class="line"></span><br><span class="line">5. enter r[replace_char] to replace current char. (enter R to enter REPLACE mode <span class="built_in">where</span> you can replace multiple chars)</span><br><span class="line"></span><br><span class="line">6. enter [ops_num]u to undo. (Ctrl+r to redo the <span class="built_in">command</span>)</span><br><span class="line"></span><br><span class="line">7. enter g to go to specific line. (enter <span class="string">&#x27;:set nu&#x27;</span> to show the line number,use <span class="string">&#x27;set:nonu&#x27;</span> to cancel. <span class="string">&#x27;G&#x27;</span> jump to the end of file.<span class="string">&#x27;gg&#x27;</span> to jump to the head of the file.<span class="string">&#x27;[num]G&#x27;</span> or <span class="string">&#x27;[num]gg&#x27;</span>to jump to desired line. )</span><br><span class="line">8. <span class="string">&#x27;/&#x27;</span> is used <span class="keyword">for</span> search things. (show <span class="string">&#x27;pattern not found&#x27;</span> when nothing found, <span class="string">&#x27;n&#x27;</span> next)</span><br><span class="line">9. find the word and replace it: <span class="string">&#x27;:s/[string_to_replace]/[new_string]&#x27;</span>, <span class="keyword">if</span> you want to replace all word match <span class="keyword">in</span> current line <span class="keyword">then</span> use <span class="string">&#x27;:s/[string_to_replace]/[new_string]/g&#x27;</span> (a special <span class="keyword">case</span>: replace a word from line 2 to 4: <span class="string">&#x27;:2,4 s/[string_to_replace]/[new_string]&#x27;</span>, <span class="keyword">if</span> you want to replace all word <span class="keyword">in</span> this file <span class="keyword">then</span> we use <span class="string">&#x27;:%s/[string_to_replace]/[new_string]/g&#x27;</span>) </span><br><span class="line">10. :r [file_name]  merge current file with another file.</span><br><span class="line">11. :sp split screen into halve. :vsp vertical split. (Ctrl w + o, save only current viewport)</span><br><span class="line">12. run bash cli <span class="keyword">in</span> vim : <span class="string">&#x27;:!&#x27;</span> or <span class="keyword">in</span> current folder <span class="string">&#x27;:!ls&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Vim-configuration"><a href="#Vim-configuration" class="headerlink" title="Vim configuration"></a>Vim configuration</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install vim plug-ins by yourself</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># config args .vimrc (USEFUL args: &#x27;:set option = value&#x27;) , let&#x27;s write it now</span></span><br><span class="line"><span class="comment"># .vimrc file usually located at the /etc/vimrc</span></span><br><span class="line"></span><br><span class="line">some args to add <span class="keyword">in</span> .vimrc</span><br><span class="line"></span><br><span class="line">syntax : on</span><br><span class="line">:<span class="built_in">set</span> number (the same as :<span class="built_in">set</span> nu)</span><br><span class="line"><span class="built_in">set</span> sshowcmd</span><br><span class="line"><span class="built_in">set</span> ignorecase</span><br><span class="line"><span class="built_in">set</span> mouse=a</span><br><span class="line"></span><br><span class="line"><span class="comment"># There are more vim configuration available on Github</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Intro-to-version-control-or-software-configuration-management-software"><a href="#Intro-to-version-control-or-software-configuration-management-software" class="headerlink" title="Intro to version control (or software configuration management) software"></a>Intro to version control (or software configuration management) software</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Git (and other options...like SVN, Bazaar, Mercurial)</span></span><br><span class="line"><span class="comment"># it can track process, coordinate the work... (can come back to any previous version)</span></span><br><span class="line"><span class="comment"># central model, distributed model.</span></span><br><span class="line">[mo@mos-computer ~]$ sudo yum install -y git</span><br><span class="line">[mo@mos-computer ~]$ sudo yum install -y gitk</span><br><span class="line">[mo@mos-computer ~]$ git --version</span><br><span class="line">git version 1.8.3.1</span><br><span class="line">[mo@mos-computer ~]$ git config --global color.ui auto</span><br><span class="line">[mo@mos-computer ~]$ git config --global color.diff auto</span><br><span class="line">[mo@mos-computer ~]$ git config --global color.status auto</span><br><span class="line">[mo@mos-computer ~]$ git config --global color.branch auto</span><br><span class="line"><span class="comment"># git config --global color.ui false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># username</span></span><br><span class="line">[mo@mos-computer ~]$ git config --global user.name <span class="string">&quot;Mo&quot;</span></span><br><span class="line"><span class="comment">#[mo@mos-computer ~]$ git config --global --replace-all user.name &quot;Mo&quot;</span></span><br><span class="line">[mo@mos-computer ~]$ git config --global user.email <span class="string">&quot;moshuheng922@google.com&quot;</span></span><br><span class="line"><span class="comment"># you can replace the email address in a similar way like user name</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># man git-config</span></span><br><span class="line"><span class="comment"># &#x27;git-config --list&#x27; or &#x27;vim ~/.gitconfig&#x27; to view the config file</span></span><br><span class="line"><span class="comment">#config gitgit</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># you can simplify the git command</span></span><br><span class="line">[mo@mos-computer ~]$ git config --global alias.co checkout</span><br><span class="line"><span class="comment"># so after this command activated we can use &#x27;git co&#x27; to represnets &#x27;git checkout&#x27;</span></span><br><span class="line"><span class="comment"># another option was &#x27;vim ~/.gitconfig&#x27; and change the option in the alias areas</span></span><br><span class="line">[mo@mos-computer ~]$ cat ~/.gitconfig</span><br><span class="line">[color]</span><br><span class="line">	ui = auto</span><br><span class="line">	diff = auto</span><br><span class="line">	status = auto</span><br><span class="line">	branch = auto</span><br><span class="line">[user]</span><br><span class="line">	name = Mo</span><br><span class="line">	email = moshuheng922@google.com</span><br><span class="line">[<span class="built_in">alias</span>]</span><br><span class="line">	co = checkout</span><br><span class="line">	st = status</span><br><span class="line"></span><br><span class="line"><span class="comment"># less .gitconfig</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Register in Github, I am sure you can do this yourself</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Work on your personal Github page using tools like: Hexo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Clone Github repository using bash command line</span></span><br><span class="line">git <span class="built_in">clone</span> [https_url] [cloned_repository_name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Or you can clone it with SSH</span></span><br><span class="line">[mo@mos-computer .ssh]$ ssh-keygen -C <span class="string">&quot;bushit4455@126.com&quot;</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/home/mo/.ssh/id_rsa): /home/mo/.ssh/id_rsa_github     </span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /home/mo/.ssh/id_rsa_github.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /home/mo/.ssh/id_rsa_github.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:q82xIEhNGqovOyUEaOCCqtFM4CkiBOOQPUF2aMkJkGk bushit4455@126.com</span><br><span class="line">The key<span class="string">&#x27;s randomart image is:</span></span><br><span class="line"><span class="string">+---[RSA 2048]----+</span></span><br><span class="line"><span class="string">|&amp;X+=.            |</span></span><br><span class="line"><span class="string">|&amp;EX.             |</span></span><br><span class="line"><span class="string">|X*o..            |</span></span><br><span class="line"><span class="string">|** =             |</span></span><br><span class="line"><span class="string">|= = .   S        |</span></span><br><span class="line"><span class="string">|+o..     .       |</span></span><br><span class="line"><span class="string">|oo. . . o        |</span></span><br><span class="line"><span class="string">|o.   . = o       |</span></span><br><span class="line"><span class="string">|.+.   . +        |</span></span><br><span class="line"><span class="string">+----[SHA256]-----+</span></span><br><span class="line"><span class="string">[mo@mos-computer .ssh]$ ls</span></span><br><span class="line"><span class="string">config  id_rsa  id_rsa_github  id_rsa_github.pub  id_rsa.pub  known_hosts</span></span><br><span class="line"><span class="string">[mo@mos-computer .ssh]$ cat id_rsa_github.pub</span></span><br><span class="line"><span class="string">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZ6D0nSdNmfdn0/I+vAtkISL1QE+y4eoxSZr8ho9gv+yFK/r1qAFNv+o3fuq3lS/4yP9+ygADE3FxMNde+W05pvoyu1txOPkT5TLBpgaYgbI2Q/InsSYdG7B0u9drNxhZYerCdjO3WSPs5oEiOqg2wcJIreKiOt8/C7fLz5BRfrxXjYzDUY2oaLFSN3BScyn9Tr9YYNnxV0WImPH9754u2KEIgnQ77XNlVoP/GzUpIEME9ISLAYzq3se7yF8ywJqN2qor2GO2ke7GnEX0O9l4s1fBDUsMQiCApp2+P7ckIPXPXBqA4ONoFaTvIAgZsDRrU4Srq7CBO+QUnWsSdTSuf bushit4455@126.com</span></span><br><span class="line"><span class="string"># copy this public key to github settings SSH key and then test the connection</span></span><br><span class="line"><span class="string">[mo@mos-computer .ssh]$ ssh -T git@github.com</span></span><br><span class="line"><span class="string">The authenticity of host &#x27;</span>github.com (13.250.177.223)<span class="string">&#x27; can&#x27;</span>t be established.</span><br><span class="line">RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.</span><br><span class="line">RSA key fingerprint is MD5:16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.</span><br><span class="line">Are you sure you want to <span class="built_in">continue</span> connecting (yes/no)? yes</span><br><span class="line">Warning: Permanently added <span class="string">&#x27;github.com,13.250.177.223&#x27;</span> (RSA) to the list of known hosts.</span><br><span class="line">Hi M0JaX999429! You<span class="string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[mo@mos-computer .ssh]$ cat known_hosts </span></span><br><span class="line"><span class="string">192.168.0.120 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBG1cXD02hhw5s6ron7bqSYyWbuNyn33zG/IG8QwpkC2esVlGWzJDebsbBsjw/sfqYMq/uwZwsnBSqQE8W3uxg9A=</span></span><br><span class="line"><span class="string">github.com,13.250.177.223 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># How to push code to Github?</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Shuheng Mo</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Manners maketh man.</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/06/19/SSH_RemoteConnect_Note/">SSH and remotely connect to server (minimal)</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Shuheng Mo | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
